@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="null.css" />
+		<link rel="stylesheet" href="style.css" />
+
+		<title>test_Weatcher_DS</title>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<div class="background-wrapper">
+				<img
+					id="background-img"
+					src="image/bg/luiz.jpg"
+					class="background__image"
+					alt="Nature picture mountains and water"
+				/>
+			</div>
+			<div class="container">
+				<!-- ----------------------------------- Header ------------------------------- -->
+				<header class="header">
+					<div class="header__weather-right weather-right">
+						<div class="weather-right">
+							<div class="weather-right__icon-temp-block">
+								<div
+									id="weather-current"
+									class="weather-right__current-weather-icon"
+								></div>
+								<div id="weather-temp" class="weather-right__temp"></div>
+							</div>
+
+							<div class="weather-right__city city">
+								<h3 id="weather-city" class="city__name-default">Краснодар</h3>
+								<input
+									id="weather-choose"
+									class="city__choose"
+									type="text"
+									placeholder="выбрать город"
+								/>
+							</div>
+						</div>
+					</div>
+				</header>
+
+				<!-- ---------------------------------- Time View ----------------------------- -->
+				<section class="time-view">
+					<div id="time-per-second" class="time-view__time-per-second"></div>
+					<div id="date" class="time-view__date"></div>
+				</section>
+				<!-- --------------------------------- popup Tasks ----------------------------- -->
+				<section class="popup-tasks">
+					<button
+						id="open-popup-tasks"
+						class="popup-tasks__open-btn open-popup-tasks"
+					>
+						Открыть задачи
+					</button>
+					<div id="popup-tasks-popup-bg" class="popup-tasks__popup-bg popup-bg">
+						<!-- <form class="popup">
+						 <img src="images/close.svg" class="close-popup" />
+						<a href="#" class="close-popup">X</a>
+
+						<label>
+							<input type="tel" name="tel" />
+							<div class="label__text">Ваш телефон</div>
+						</label>
+						<label>
+							<textarea name="message"></textarea>
+							<div class="label__text">Ваше сообщение</div>
+						</label>
+						<button type="submit">Отправить</button>
+					</form> -->
+
+						<div class="popup-bg__popup popup">
+							<button class="popup-bg__close-popup close-popup">X</button>
+							<div id="taskList" class="popup__task-list"></div>
+							<div id="addForm" class="popup__add-form">
+								<form
+									class="popup__form-task form-task"
+									onsubmit="return false"
+								>
+									<div class="form-task__group group-task">
+										<label class="group-task__task-title" for="taskTitle"
+											>Название</label
+										>
+										<input
+											type="text"
+											class="group-task__form-control"
+											id="taskTitle"
+											placeholder="Ваше задание"
+										/>
+										<small
+											id="taskTitleHelp"
+											class="group-task__form-title-help"
+										></small>
+									</div>
+
+									<button
+										class="form-task__task-add-button btn btn-add-button"
+										id="taskAddButton"
+									>
+										Добавить
+									</button>
+									<button
+										class="form-task__task-del-button btn btn-del-button"
+										id="taskDelButton"
+									>
+										Удалить выполненные задачи
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<div id="error-window" class="error"></div>
+			</div>
+		</div>
+
+		<script type="module" src="config.js"></script>
+		<script type="module" src="script.js"></script>
+	</body>
+</html>

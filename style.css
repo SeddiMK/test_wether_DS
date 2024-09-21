@@ -1,0 +1,453 @@
+@font-face {
+	font-family: 'BlinkMacSystemFont';
+	font-weight: 500;
+	src: url(./fonts/BlinkMacSystemFont-Light.woff) format('woff'),
+		url(./fonts/BlinkMacSystemFont-Light.woff2) format('woff2');
+}
+@font-face {
+	font-family: 'BlinkMacSystemFont';
+	font-weight: 500;
+	src: url(./fonts/BlinkMacSystemFont-Medium.woff) format('woff'),
+		url(./fonts/BlinkMacSystemFont-Medium.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: 'NeueHaasDisplayLight';
+	font-weight: 300;
+	src: url(./fonts/NeueHaasDisplayLight.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'NeueHaasDisplayLight';
+	font-weight: 500;
+	src: url(./fonts/NeueHaasDisplayMedium.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'NeueHaasDisplayLight';
+	font-weight: 700;
+	src: url(./fonts/NeueHaasDisplayBold.ttf) format('truetype');
+}
+
+:root {
+	box-sizing: border-box;
+	font-size: 16px;
+
+	--app-width: 100vw;
+	--app-height: 100vh;
+	--base-color: rgb(51, 90, 233);
+	--title-color: rgb(12, 181, 223);
+	--base-font: BlinkMacSystemFont, NeueHaasDisplayLight, Georgia,
+		'Times New Roman', Times, sans-serif;
+	/* -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif */
+	--base-font-color: rgb(255, 255, 255);
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	line-height: 1;
+	font-family: var(--base-font);
+	color: var(--base-font-color);
+	background-color: rgb(227, 182, 137);
+}
+
+/*------------------------------------ wrapper ----------------------------------*/
+.container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	max-width: var(--width);
+	max-height: var(--height);
+}
+
+.background-wrapper {
+}
+
+.background__image {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	width: 100%;
+	min-width: 640px;
+	height: auto;
+	min-height: 100%;
+}
+/*------------------------------------ header ----------------------------------*/
+.header {
+}
+.header__weather-right {
+}
+.weather-right {
+}
+.weather-right__icon-temp-block {
+}
+.weather-right__current-weather-icon {
+}
+.weather-right__temp {
+}
+.weather-right__city {
+}
+.city {
+}
+.city__name-default {
+}
+.city__choose {
+}
+.time-view {
+}
+.time-view__time-per-second {
+}
+.time-view__date {
+}
+
+/*-------------------------------------- popup ------------------------------------*/
+.popup-tasks {
+}
+.popup-tasks__open-btn {
+}
+.open-popup-tasks {
+}
+.popup-tasks__popup-bg {
+}
+.popup-bg {
+}
+.popup-bg__popup {
+}
+.popup {
+}
+.popup-bg__close-popup {
+}
+.close-popup {
+}
+.popup__task-list {
+}
+.popup__add-form {
+}
+.popup__form-task {
+}
+.form-task {
+}
+.form-task__group {
+}
+.group-task {
+}
+.group-task__task-title {
+}
+.group-task__form-control {
+}
+.group-task__form-title-help {
+}
+.form-task__task-add-button {
+}
+.btn {
+}
+.btn-add-button {
+}
+.form-task__task-del-button {
+}
+.btn-del-button {
+}
+.error {
+}
+/*------------------------------------ popup Tasks ----------------------------------*/
+
+.popup__bg {
+	position: fixed;
+	top: 100rem;
+	left: 100rem;
+	width: 100%;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	/*  Скрываем фон и сам попап */
+	opacity: 0;
+	/*  Запрещаем ему быть целью событий */
+	pointer-events: none;
+	transition: 0.5s all;
+}
+
+.popup__bg.active {
+	/*  При добавлении класса 'active' */
+	opacity: 1;
+	/* Показываем фон и попап */
+	pointer-events: all;
+	/*  Возвращаем события */
+	transition: 0.5s all;
+}
+
+.popup {
+	position: absolute;
+	top: 70%;
+	left: 70%;
+	background: #fff;
+	width: 400px;
+	padding: 25px;
+	/*  Центрируем и масштабируем в 0 само окно */
+	transform: translate(-50%, -50%) scale(0);
+	transition: 0.5s all;
+}
+
+.popup.active {
+	/*  При добавлении класса 'active' */
+	transform: translate(-50%, -50%) scale(1);
+	/*  Так же центрируем и плавно увеличиваем */
+	transition: 0.5s all;
+}
+/* Конец важной части */
+/* Далее код для стилизации формы */
+.close-popup {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+
+.popup label {
+	width: 100%;
+	margin-bottom: 25px;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.popup .label__text {
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 500;
+	color: #cfd0d3;
+	margin-bottom: 5px;
+}
+
+.popup input {
+	height: 45px;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #cfd0d3;
+}
+
+.popup input:focus {
+	border-bottom: 1px solid #2982ff;
+}
+
+.popup input:focus + .label__text {
+	color: #2982ff;
+}
+
+.popup textarea {
+	resize: none;
+	width: 100%;
+	height: 150px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #cfd0d3;
+	font-size: 18px;
+	padding-top: 5px;
+}
+
+.popup textarea:focus {
+	border-bottom: 1px solid #2982ff;
+}
+
+.popup textarea:focus + .label__text {
+	color: #2982ff;
+}
+
+.popup button {
+	width: 100%;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 18px;
+	border: 2px solid #2982ff;
+	background: #2982ff;
+	cursor: pointer;
+	text-transform: uppercase;
+	transition: 0.5s all;
+}
+
+.popup button:hover {
+	background: #fff;
+	color: #2982ff;
+	transition: 0.5s all;
+}
+
+/*------------------------------------ task ----------------------------------*/
+.checked .task-body__title span {
+	text-decoration: line-through;
+	/* color: green; */
+}
+
+/*------------------------------------ page ----------------------------------*/
+/*------------------------------------ page ----------------------------------*/
+/*------------------------------------ page ----------------------------------*/
+/*------------------------------------ @media ----------------------------*/
+@media (min-width: 320px) {
+	.page {
+		height: calc(1vh + 50px);
+	}
+
+	.page__title {
+		font-size: 2rem;
+	}
+
+	.weather-block {
+		padding: 0.5rem;
+	}
+
+	.weather__widget {
+		padding-left: 0;
+	}
+
+	#container-openweathermap-widget-1 .widget-left--blue {
+		width: 100%;
+		left: -70%;
+	}
+
+	.widget__title {
+		line-height: 2;
+		font-size: 1.1rem;
+	}
+
+	.widget__title::before {
+		content: none;
+	}
+
+	.widget__title > h4 {
+		text-align: right;
+	}
+
+	.widget__main {
+		width: 100%;
+		margin-right: 2.5rem;
+	}
+
+	.out {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+		width: 100%;
+	}
+
+	.out__weatcher {
+		flex: 0 0 25%;
+	}
+
+	.out__map {
+		flex: 1 1 auto;
+		margin-bottom: 1.4rem;
+	}
+
+	.out__contact {
+		display: flex;
+		align-items: center;
+		flex: 0 0 33%;
+		min-width: 240px;
+	}
+
+	.fa {
+		width: 35px;
+	}
+
+	.about-me li {
+		display: flex;
+		align-items: center;
+	}
+
+	.out__icon-temp-block {
+		display: flex;
+		justify-content: center;
+	}
+
+	.main-weather__spoiler {
+		display: flex;
+		justify-content: center;
+		gap: 1.5rem;
+		flex-wrap: wrap;
+	}
+
+	#mapholder {
+		width: 260px;
+		height: 260px;
+	}
+}
+
+@media (min-width: 498.98px) {
+	.widget__title::before {
+		content: '';
+	}
+
+	.out__weatcher {
+		flex: 0 0 auto;
+	}
+
+	.out__weatcher:not(:last-child) {
+		margin-right: 0.6rem;
+	}
+
+	.out__map {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.out__contact {
+		display: flex;
+		justify-content: center;
+		flex: 0 0 100%;
+		min-width: 311px;
+	}
+}
+
+@media (min-width: 567.98px) {
+	.out {
+		flex-direction: row;
+	}
+
+	.out__weatcher:not(:last-child) {
+		margin-right: 1.5rem;
+	}
+
+	.fa {
+		width: 45px;
+	}
+}
+
+@media (min-width: 767.98px) {
+	.out__map {
+		justify-content: center;
+	}
+
+	.out__weatcher:not(:last-child) {
+		margin-right: 1.5rem;
+	}
+
+	.out__contact {
+		flex: 0 0 auto;
+	}
+
+	#mapholder {
+		width: 340px;
+		height: 300px;
+		margin-bottom: 2rem;
+	}
+}
