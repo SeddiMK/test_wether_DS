@@ -125,8 +125,9 @@ async function showPosWeatForecast(city, lat, lon) {
 
 // Показываем данные =======================================================
 function showWeather(dataWeather) {
+	let sizeIcon = 2
 	// Иконка
-	divImg.innerHTML = `<img class='current-weather-icon' src='https://openweathermap.org/img/wn/${dataWeather.weather[0].icon}@2x.png' alt='Image Watcher'>`
+	divImg.innerHTML = `<img class='current-weather-icon' src='https://openweathermap.org/img/wn/${dataWeather.weather[0].icon}@${sizeIcon}x.png' alt='Image Watcher'>`
 	// Температура
 	temp.innerHTML = Math.round(dataWeather.main.temp) + '&deg;'
 	// Имя города
@@ -265,7 +266,7 @@ function addTask() {
 					<span>${nameTask.value}</span>
 				</div>
 				<button type="button" class="task-body__close-btn close-task-btn">
-								<span>X &times;</span>
+								<span>удалить</span>
 				</button>
 			</div>
 

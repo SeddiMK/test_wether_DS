@@ -33,11 +33,15 @@
 
 	--app-width: 100vw;
 	--app-height: 100vh;
+	--font-size-time: 8rem;
+	--font-size-date: 2.5rem;
+	--font-size-open-task: 2rem;
+	--pad-wrp: 0.7rem;
 	--base-color: rgb(51, 90, 233);
 	--title-color: rgb(12, 181, 223);
+	--bcg-color-popup: rgba(0, 0, 0, 0.88);
 	--base-font: BlinkMacSystemFont, NeueHaasDisplayLight, Georgia,
 		'Times New Roman', Times, sans-serif;
-	/* -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif */
 	--base-font-color: rgb(255, 255, 255);
 }
 
@@ -51,6 +55,7 @@ body {
 	font-family: var(--base-font);
 	color: var(--base-font-color);
 	background-color: rgb(227, 182, 137);
+	overflow: hidden;
 }
 
 /*------------------------------------ wrapper ----------------------------------*/
@@ -60,6 +65,10 @@ body {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	padding: var(--pad-wrp);
+
+	/* !!! */
+	background-color: rgba(2, 127, 212, 0.1);
 }
 
 .wrapper {
@@ -71,9 +80,6 @@ body {
 	height: 100%;
 	max-width: var(--width);
 	max-height: var(--height);
-}
-
-.background-wrapper {
 }
 
 .background__image {
@@ -91,80 +97,74 @@ body {
 /*------------------------------------ header ----------------------------------*/
 .header {
 }
+
 .header__weather-right {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
+
 .weather-right {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0.5rem;
+	padding-right: 0;
 }
+
 .weather-right__icon-temp-block {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 }
-.weather-right__current-weather-icon {
+
+.weather-right__current-weather-icon img {
+	max-width: 3rem;
 }
+
 .weather-right__temp {
+	font-size: 2rem;
 }
-.weather-right__city {
-}
+
 .city {
+	text-align: center;
 }
+
 .city__name-default {
+	margin-bottom: 0.4rem;
 }
+
 .city__choose {
+	opacity: 0.5;
+	border-radius: 0.3rem;
+	border: none;
+	padding: 0.2rem 0.3rem;
+	max-width: 8.5rem;
 }
+
 .time-view {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 74%;
+	padding-bottom: 8rem;
 }
+
 .time-view__time-per-second {
+	text-align: center;
+	font-size: var(--font-size-time);
+	margin-bottom: 1rem;
 }
+
 .time-view__date {
+	max-width: 19rem;
+	font-size: var(--font-size-date);
 }
 
 /*-------------------------------------- popup ------------------------------------*/
-.popup-tasks {
-}
-.popup-tasks__open-btn {
-}
-.open-popup-tasks {
-}
-.popup-tasks__popup-bg {
-}
-.popup-bg {
-}
-.popup-bg__popup {
-}
-.popup {
-}
-.popup-bg__close-popup {
-}
-.close-popup {
-}
-.popup__task-list {
-}
-.popup__add-form {
-}
-.popup__form-task {
-}
-.form-task {
-}
-.form-task__group {
-}
-.group-task {
-}
-.group-task__task-title {
-}
-.group-task__form-control {
-}
-.group-task__form-title-help {
-}
-.form-task__task-add-button {
-}
-.btn {
-}
-.btn-add-button {
-}
-.form-task__task-del-button {
-}
-.btn-del-button {
-}
-.error {
-}
 /*------------------------------------ popup Tasks ----------------------------------*/
 
 .popup__bg {
@@ -178,7 +178,7 @@ body {
 	opacity: 0;
 	/*  Запрещаем ему быть целью событий */
 	pointer-events: none;
-	transition: 0.5s all;
+	transition: 0.3s all;
 }
 
 .popup__bg.active {
@@ -187,41 +187,14 @@ body {
 	/* Показываем фон и попап */
 	pointer-events: all;
 	/*  Возвращаем события */
-	transition: 0.5s all;
-}
-
-.popup {
-	position: absolute;
-	top: 70%;
-	left: 70%;
-	background: #fff;
-	width: 400px;
-	padding: 25px;
-	/*  Центрируем и масштабируем в 0 само окно */
-	transform: translate(-50%, -50%) scale(0);
-	transition: 0.5s all;
+	transition: 0.3s all;
 }
 
 .popup.active {
 	/*  При добавлении класса 'active' */
 	transform: translate(-50%, -50%) scale(1);
 	/*  Так же центрируем и плавно увеличиваем */
-	transition: 0.5s all;
-}
-/* Конец важной части */
-/* Далее код для стилизации формы */
-.close-popup {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
-}
-
-.popup label {
-	width: 100%;
-	margin-bottom: 25px;
-	display: flex;
-	flex-direction: column-reverse;
+	transition: 0.53s all;
 }
 
 .popup .label__text {
@@ -230,14 +203,6 @@ body {
 	font-weight: 500;
 	color: #cfd0d3;
 	margin-bottom: 5px;
-}
-
-.popup input {
-	height: 45px;
-	font-size: 18px;
-	border: none;
-	outline: none;
-	border-bottom: 1px solid #cfd0d3;
 }
 
 .popup input:focus {
@@ -267,187 +232,171 @@ body {
 	color: #2982ff;
 }
 
-.popup button {
-	width: 100%;
-	height: 45px;
+.popup-tasks {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	color: #fff;
-	font-size: 18px;
-	border: 2px solid #2982ff;
-	background: #2982ff;
-	cursor: pointer;
-	text-transform: uppercase;
+	justify-content: flex-end;
+	font-size: var(--font-size-open-task);
+}
+
+.popup-tasks__open-btn {
+	background-color: rgba(2, 127, 212, 0.3);
+	border-radius: 0.7rem;
+	padding: 0.7rem;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.popup-tasks__open-btn:hover {
+	background-color: rgba(2, 212, 145, 0.3);
+}
+
+.popup-tasks__open-btn:focus {
+	color: rgba(1, 47, 32, 0.789);
+}
+
+.popup {
+	position: absolute;
+	top: 59%;
+	left: 70%;
+	background: #fff;
+	width: 26rem;
+	padding: 1rem;
+	background-color: var(--bcg-color-popup);
+	border-radius: 0.4rem;
+	/*  Центрируем и масштабируем в 0 само окно */
+	transform: translate(-50%, -50%) scale(0);
 	transition: 0.5s all;
 }
 
+.popup__task-list .task:not(:last-child) {
+	margin-bottom: 0rem;
+}
+
+.form-task {
+	font-size: 1.4rem;
+}
+
+.group-task {
+	margin-bottom: 1rem;
+}
+
+.group-task__task-title {
+	width: 100%;
+	margin-bottom: 1rem;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.group-task__form-control {
+	width: 100%;
+	height: 2rem;
+	padding: 0 0.5rem;
+	font-size: 1rem;
+	border: none;
+	outline: none;
+	border-radius: 0.3rem;
+}
+
+.popup button {
+	padding: 0.5rem;
+}
+
 .popup button:hover {
+	border-radius: 0.3rem;
 	background: #fff;
 	color: #2982ff;
-	transition: 0.5s all;
+	transition: 0.3s all;
+}
+/* ---------------------- btn --------------------------------- */
+.close-popup {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 1rem;
+	height: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border-radius: 0.3em;
+	color: #fff;
+	font-size: 1.2rem;
+}
+
+button.close-popup {
+	padding: 0.8rem;
+}
+
+.btn {
+}
+
+.btn-add-button {
+	margin-bottom: 1rem;
+}
+
+.error {
+}
+
+/*------------------------------------ task body ----------------------------------*/
+.task {
+	padding: 0.5rem;
+	padding-left: 0;
+	margin-bottom: 1rem;
+}
+
+.task-body {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 1rem;
+}
+
+.task-body div:not(:last-child) {
+	margin-right: 0.8rem;
+}
+
+.task-body__task-check {
+	width: 1rem;
+	text-align: center;
+}
+
+.task-body__title {
+	display: inline-block;
+
+	white-space: wrap;
+	overflow: hidden;
+	width: 18rem;
+	font-size: 1.5rem;
+	word-break: break-all;
+	line-height: 0.8rem;
+}
+
+.task-body__title span {
+	line-height: 1.7rem;
+}
+
+.close-task-btn {
+	font-size: 0.8rem;
+	padding: 0.4rem;
 }
 
 /*------------------------------------ task ----------------------------------*/
 .checked .task-body__title span {
 	text-decoration: line-through;
-	/* color: green; */
+	color: rgba(2, 212, 145, 0.4);
 }
 
-/*------------------------------------ page ----------------------------------*/
-/*------------------------------------ page ----------------------------------*/
-/*------------------------------------ page ----------------------------------*/
 /*------------------------------------ @media ----------------------------*/
 @media (min-width: 320px) {
-	.page {
-		height: calc(1vh + 50px);
-	}
-
-	.page__title {
-		font-size: 2rem;
-	}
-
-	.weather-block {
-		padding: 0.5rem;
-	}
-
-	.weather__widget {
-		padding-left: 0;
-	}
-
-	#container-openweathermap-widget-1 .widget-left--blue {
-		width: 100%;
-		left: -70%;
-	}
-
-	.widget__title {
-		line-height: 2;
-		font-size: 1.1rem;
-	}
-
-	.widget__title::before {
-		content: none;
-	}
-
-	.widget__title > h4 {
-		text-align: right;
-	}
-
-	.widget__main {
-		width: 100%;
-		margin-right: 2.5rem;
-	}
-
-	.out {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 1.5rem;
-		width: 100%;
-	}
-
-	.out__weatcher {
-		flex: 0 0 25%;
-	}
-
-	.out__map {
-		flex: 1 1 auto;
-		margin-bottom: 1.4rem;
-	}
-
-	.out__contact {
-		display: flex;
-		align-items: center;
-		flex: 0 0 33%;
-		min-width: 240px;
-	}
-
-	.fa {
-		width: 35px;
-	}
-
-	.about-me li {
-		display: flex;
-		align-items: center;
-	}
-
-	.out__icon-temp-block {
-		display: flex;
-		justify-content: center;
-	}
-
-	.main-weather__spoiler {
-		display: flex;
-		justify-content: center;
-		gap: 1.5rem;
-		flex-wrap: wrap;
-	}
-
-	#mapholder {
-		width: 260px;
-		height: 260px;
+	.popup {
+		left: 50%;
+		width: 19rem;
 	}
 }
 
-@media (min-width: 498.98px) {
-	.widget__title::before {
-		content: '';
-	}
-
-	.out__weatcher {
-		flex: 0 0 auto;
-	}
-
-	.out__weatcher:not(:last-child) {
-		margin-right: 0.6rem;
-	}
-
-	.out__map {
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-	}
-
-	.out__contact {
-		display: flex;
-		justify-content: center;
-		flex: 0 0 100%;
-		min-width: 311px;
-	}
-}
-
-@media (min-width: 567.98px) {
-	.out {
-		flex-direction: row;
-	}
-
-	.out__weatcher:not(:last-child) {
-		margin-right: 1.5rem;
-	}
-
-	.fa {
-		width: 45px;
-	}
-}
-
-@media (min-width: 767.98px) {
-	.out__map {
-		justify-content: center;
-	}
-
-	.out__weatcher:not(:last-child) {
-		margin-right: 1.5rem;
-	}
-
-	.out__contact {
-		flex: 0 0 auto;
-	}
-
-	#mapholder {
-		width: 340px;
-		height: 300px;
-		margin-bottom: 2rem;
+@media (min-width: 640px) {
+	.popup {
+		left: 65%;
+		width: 26rem;
 	}
 }
