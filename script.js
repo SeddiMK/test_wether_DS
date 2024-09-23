@@ -36,9 +36,6 @@ let closePopupButton = document.querySelector('.close-popup') // Кнопка д
 // ---------------------------------------------------------------------
 let cityChoose = ''
 let dataWeather
-// default Krasnodar
-let lat = 45.04484
-let lon = 38.97603
 
 // Динамическая смена обоев в зависимости от текущего времени ===========
 const dataUrlImgBgd = {
@@ -62,7 +59,14 @@ timeShowBgd()
 // Using the Geolocation API ===============================================
 function getLocation() {
 	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(fetchWeather, showError, {})
+		navigator.permissions.query({ name: 'geolocation' }).then(result => {
+			if (result.state === 'granted') {
+				navigator.geolocation.getCurrentPosition(fetchWeather, showError, {})
+			} else if (result.state === 'denied') {
+				fetchWeather()
+			}
+			// Don't do anything if the permission was denied.
+		})
 	} else {
 		console.log('Геолокация не поддерживается вашим браузером.')
 	}
@@ -79,14 +83,16 @@ valInpCity.addEventListener('change', weatherChoose)
 
 // Запрос погоды ===========================================================
 function fetchWeather(position, city) {
-	if (city === '' || city === undefined) {
-		lat = position?.coords?.latitude
-		lon = position?.coords?.longitude
-		city = ''
+	let lat = position?.coords?.latitude
+	let lon = position?.coords?.longitude
+
+	if (
+		city === '' ||
+		(city === undefined && (lat === undefined || lon === undefined))
+	) {
+		city = 'краснодар' // lat = 45.04484 lon = 38.97603  default Краснодар ***
 		showPosWeatForecast(city, lat, lon)
 	} else {
-		lat = ''
-		lon = ''
 		showPosWeatForecast(city, lat, lon)
 	}
 }
@@ -94,14 +100,16 @@ function fetchWeather(position, city) {
 async function showPosWeatForecast(city, lat, lon) {
 	// let scrnWidth = screen.width - 64 // !!!
 
-	console.log(city, lat, lon)
+	// console.log(city, lat, lon) // !!!
+
+	if (city === undefined) city = ''
 	const paramFetchWeather = `weather?q=${city}&lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIKEY}`
 
 	try {
 		const resWeather = await fetch(URL + paramFetchWeather)
 		dataWeather = await resWeather.json()
-		console.log(URL + paramFetchWeather)
-		console.log(dataWeather)
+
+		// console.log(dataWeather) // !!!
 	} catch (error) {
 		console.error(error)
 	}
@@ -318,23 +326,25 @@ function showError(error) {
 		case error.PERMISSION_DENIED:
 			errorWindow.innerHTML = 'Пользователь не предоставил доступ к геолокации.'
 			alert(
-				'Не могу установить ваше местоположение. Возможно, вы не дали разрешение на показ геолокации. Показ геолокации можно установить в строке адреса сайта, справа значок геолокации'
+				'Не могу установить ваше местоположение. Возможно, вы не дали разрешение на показ геолокации. Показ геолокации можно установить в строке адреса сайта, слева от адресной строки.'
 			)
+
 			break
 		case error.POSITION_UNAVAILABLE:
-			errorWindow.innerHTML = 'Location information is unavailable.'
+			errorWindow.innerHTML = 'Информация о местоположении недоступна.'
 			alert(
-				'Информация о местоположении недоступна. Проверьте разрешение на показ геолокации. Показ геолокации можно установить в строке адреса сайта, справа значок геолокации'
+				'Информация о местоположении недоступна. Проверьте разрешение на показ геолокации. Показ геолокации можно установить в строке адреса сайта, слева от адресной строки.'
 			)
 			break
 		case error.TIMEOUT:
-			errorWindow.innerHTML = 'The request to get user location timed out.'
+			errorWindow.innerHTML =
+				'Время ожидания запроса на получение местоположения пользователя истекло.'
 			alert(
 				'Время ожидания запроса на получение местоположения пользователя истекло.'
 			)
 			break
 		case error.UNKNOWN_ERROR:
-			errorWindow.innerHTML = 'An unknown error occurred.'
+			errorWindow.innerHTML = 'Произошла неизвестная ошибка.'
 			alert('Произошла неизвестная ошибка.')
 			break
 	}
