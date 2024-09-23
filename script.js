@@ -1,7 +1,7 @@
 import { URL_CONF, API_KEY_CONF } from './config.js'
 
 const { URL } = URL_CONF
-const { APIKEY } = API_KEY_CONF
+// const { APIKEY } = API_KEY_CONF
 
 // weather data output==================================================
 const out = document?.querySelector('.weather-right')
