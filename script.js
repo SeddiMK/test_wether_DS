@@ -1,7 +1,8 @@
 import { URL_CONF, API_KEY_CONF } from './config.js'
 
 const { URL } = URL_CONF
-// const { APIKEY } = API_KEY_CONF
+// const { API_KEY } = API_KEY_CONF
+const API_KEY = process.env.PORT
 
 // weather data output==================================================
 const out = document?.querySelector('.weather-right')
@@ -99,7 +100,7 @@ function fetchWeather(position, city) {
 
 async function showPosWeatForecast(city, lat, lon) {
 	if (city === undefined) city = ''
-	const paramFetchWeather = `weather?q=${city}&lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIKEY}`
+	const paramFetchWeather = `weather?q=${city}&lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${API_KEY}`
 
 	try {
 		const resWeather = await fetch(URL + paramFetchWeather)
