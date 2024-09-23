@@ -148,7 +148,6 @@ body {
 	justify-content: center;
 	flex-direction: column;
 	height: 74%;
-	padding-bottom: 8rem;
 }
 
 .time-view__time-per-second {
