@@ -2,7 +2,7 @@ import { URL_CONF, API_KEY_CONF } from './config.js'
 
 const { URL } = URL_CONF
 // const { API_KEY } = API_KEY_CONF
-const API_KEY = process.env.PORT
+const API_KEY = process.env.API_KEY
 
 // weather data output==================================================
 const out = document?.querySelector('.weather-right')
