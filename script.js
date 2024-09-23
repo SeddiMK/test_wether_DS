@@ -98,18 +98,12 @@ function fetchWeather(position, city) {
 }
 
 async function showPosWeatForecast(city, lat, lon) {
-	// let scrnWidth = screen.width - 64 // !!!
-
-	// console.log(city, lat, lon) // !!!
-
 	if (city === undefined) city = ''
 	const paramFetchWeather = `weather?q=${city}&lat=${lat}&lon=${lon}&units=metric&lang=ru&appid=${APIKEY}`
 
 	try {
 		const resWeather = await fetch(URL + paramFetchWeather)
 		dataWeather = await resWeather.json()
-
-		// console.log(dataWeather) // !!!
 	} catch (error) {
 		console.error(error)
 	}
@@ -119,8 +113,6 @@ async function showPosWeatForecast(city, lat, lon) {
 		localStorage.setItem('cityHome', dataWeather.name)
 
 	showWeather(dataWeather)
-
-	// if (scrnWidth >= 300) scrnWidth = 300 // !!!
 }
 
 // Показываем данные =======================================================
