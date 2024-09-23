@@ -316,7 +316,7 @@ function showError(error) {
 	console.log(error)
 	switch (error.code) {
 		case error.PERMISSION_DENIED:
-			errorWindow.innerHTML = 'User denied the request for Geolocation.'
+			errorWindow.innerHTML = 'Пользователь не предоставил доступ к геолокации.'
 			alert(
 				'Не могу установить ваше местоположение. Возможно, вы не дали разрешение на показ геолокации. Показ геолокации можно установить в строке адреса сайта, справа значок геолокации'
 			)
