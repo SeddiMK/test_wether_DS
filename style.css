@@ -151,6 +151,7 @@ body {
 }
 
 .time-view__time-per-second {
+	width: fit-content;
 	text-align: center;
 	font-size: var(--font-size-time);
 	margin-bottom: 1rem;

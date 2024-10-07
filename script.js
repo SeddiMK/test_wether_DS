@@ -194,7 +194,7 @@ setInterval(function () {
 	let date = new Date()
 	let format = 'YYYY-MMM-DD DDD'
 	dateConvert(date, format, timePerSecondElement)
-}, 1)
+}, 1000)
 
 // popup Tasks ===================================================================
 // Скрытие/ показ попап окна при клике на крестик --------------------------------
