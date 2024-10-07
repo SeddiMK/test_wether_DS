@@ -16,24 +16,19 @@ const dateElement = document.getElementById('date')
 const errorWindow = document.querySelector('#error-window')
 
 // Элементы popup окна -----------------------------------------------------------
-// Поле - ввод, название задачи
 const nameTask = document.querySelector('#taskTitle')
-// Контейнер в который мы будем помещать задачи.
 const containerTask = document.querySelector('#taskList')
 
-// Кнопка добавить задачу
 const buttonAddTask = document.querySelector('#taskAddButton')
 
-// Кнопка добавить задачу
 const buttonDelTask = document.querySelector('#taskDelButton')
 
-// Поле помощи названия задачи
 const taskTitleHelp = document.querySelector('#taskTitleHelp')
 
-let popupBg = document.querySelector('#popup-tasks-popup-bg') // Фон попап окна
-let popup = document.querySelector('.popup') // Само окно
-let openPopupButtons = document.querySelector('#open-popup-tasks') // Кнопки для показа окна
-let closePopupButton = document.querySelector('.close-popup') // Кнопка для скрытия окна
+let popupBg = document.querySelector('#popup-tasks-popup-bg')
+let popup = document.querySelector('.popup')
+let openPopupButtons = document.querySelector('#open-popup-tasks')
+let closePopupButton = document.querySelector('.close-popup')
 // ---------------------------------------------------------------------
 let cityChoose = ''
 let dataWeather
@@ -119,11 +114,8 @@ async function showPosWeatForecast(city, lat, lon) {
 // Показываем данные =======================================================
 function showWeather(dataWeather) {
 	let sizeIcon = 2
-	// Иконка
 	divImg.innerHTML = `<img class='current-weather-icon' src='https://openweathermap.org/img/wn/${dataWeather.weather[0].icon}@${sizeIcon}x.png' alt='Image Watcher'>`
-	// Температура
 	temp.innerHTML = Math.round(dataWeather.main.temp) + '&deg;'
-	// Имя города
 	nameCity.innerHTML = 'Погода в ' + dataWeather.name
 }
 
@@ -156,7 +148,7 @@ function dateConvert(dateObj, format, domElement) {
 
 	if (dateObj === undefined && domElement) {
 		const dateDef = new Date()
-		const day = String(dateDef.getDate()).padStart(2, '0') // Добавляем ведущий 0, если день меньше 10
+		const day = String(dateDef.getDate()).padStart(2, '0')
 		const month = months[dateDef.getMonth()]
 		const dayOfWeek = daysOfWeek[dateDef.getDay()]
 		const year = dateDef.getFullYear()
@@ -207,9 +199,9 @@ setInterval(function () {
 // popup Tasks ===================================================================
 // Скрытие/ показ попап окна при клике на крестик --------------------------------
 function togglePopup() {
-	popupBg.classList.toggle('active') // Добавляем класс 'active' для фона
-	popup.classList.toggle('active') // И для самого окна
-	nameTask.focus() // fucus на поле ввода задачи
+	popupBg.classList.toggle('active')
+	popup.classList.toggle('active')
+	nameTask.focus()
 }
 
 closePopupButton.addEventListener('click', togglePopup)
@@ -217,7 +209,6 @@ openPopupButtons.addEventListener('click', togglePopup)
 
 // Прячем попап окно на чистом js при клике на фон ------------------------------
 function closePopupWindow(e) {
-	// Вешаем обработчик на весь документe.target === popupBg
 	const itsPopupBg = e.target == popupBg || popupBg.contains(e.target)
 	const its_btnOpenPopupButtons = e.target == openPopupButtons
 	const popupActive = popupBg.classList.contains('active')
@@ -230,23 +221,18 @@ document.addEventListener('click', closePopupWindow)
 
 // Добавить задачу ------------------------------------------------------------
 function addTask() {
-	// Проверяем заполнены ли поля название и описание, если не заполнено хотя-бы одно поле - прерываем дальнейшее выполнение функции возвратив пустое значение.
 	taskTitleHelp.innerText = ''
 
-	// Проверка наличия названия задачи
 	if (!nameTask.value) {
 		taskTitleHelp.innerText = 'Это поле не должно быть пустым.'
 		taskTitleHelp.style.color = 'red'
 		return
 	}
 
-	// Создаем элемент DIV
 	const task = document.createElement('div')
 
-	// Добавляем элементу DIV класс: card
 	task.classList.add('task')
 
-	// Вставляем HTML код прямо в созданный элемент <label for="taskCheck"></label>
 	task.innerHTML = `
 		<div class="task-body">
 		<div class="task-body__task-check">
@@ -265,15 +251,12 @@ function addTask() {
 
 			`
 
-	// Добавляем в контейнер созданный элемент
 	containerTask.appendChild(task)
 
-	// Даем класс checked родительскому блоку div.task
 	task?.querySelector('input').addEventListener('change', e => {
 		task.classList.toggle('checked', e.currentTarget.checked)
 	})
 
-	// Обнуляем значения полей названия и описания
 	nameTask.value = ''
 	taskTitleHelp.innerText = ''
 }
@@ -282,17 +265,14 @@ buttonAddTask.addEventListener('click', addTask)
 
 // Удаление задачи --------------------------------------------------------------
 function delTask(e) {
-	// Проверяем на какой элемент мы кликнули, если мы кликнули на элемент который содержит в себе класс .close то удаляем весь родительский блок
-	if (e.target.closest('.close-task-btn'))
-		// Поднимаемся до родительского контейнера и удаляем его полностью
-		e.target.closest('.task').remove()
+	if (e.target.closest('.close-task-btn')) e.target.closest('.task').remove()
 }
 
 containerTask.addEventListener('click', delTask)
 
 // Добавление новых задач осуществляется при нажатии на «Enter» -------------------
 function addTaskOnEnter(e) {
-	if (e.keyCode == 13) addTask
+	if (e.key == 'Enter') addTask
 }
 
 // Отслеживаем нажатие Enter
@@ -300,14 +280,10 @@ popupBg.addEventListener('keydown', addTaskOnEnter)
 
 // Удалить задачу по клику -------------------------------------------------------
 function delAllTask(e) {
-	// Чек бокс выбранных(выполненных) задач
 	const checkboxTask = containerTask?.querySelectorAll('.task.checked')
 
 	if (checkboxTask.length > 0) {
-		// удаление задач из NodeList
-		checkboxTask.forEach(el => {
-			el.remove()
-		})
+		checkboxTask.forEach(el => el.remove())
 	}
 }
 
@@ -315,7 +291,6 @@ buttonDelTask.addEventListener('click', delAllTask)
 
 // Handling Errors and Rejections  ============================================
 function showError(error) {
-	console.log(error)
 	switch (error.code) {
 		case error.PERMISSION_DENIED:
 			errorWindow.innerHTML = 'Пользователь не предоставил доступ к геолокации.'
